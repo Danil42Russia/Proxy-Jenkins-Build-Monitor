@@ -1,0 +1,9 @@
+version: "3.0"
+
+services:
+  pjbm:
+    build: .
+    container_name: pjbm
+    ports:
+      - 80:8080
+    env_file: .env
