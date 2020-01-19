@@ -5,12 +5,10 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.github.jengelman.gradle.plugins:shadow:5.0.0"
     }
 }
 
 apply plugin: 'kotlin'
-apply plugin: "com.github.johnrengelman.shadow"
 apply plugin: 'application'
 
 group 'ru.danil42russia'
@@ -48,8 +46,10 @@ dependencies {
     compile "io.ktor:ktor-client-okhttp:$ktor_version"
 }
 
-shadowJar {
-    baseName = 'proxy-jenkins-build-monitor'
-    classifier = null
-    version = null
+jar {
+    manifest {
+        attributes 'Main-Class': 'ru.danil42russia.pjbm.ApplicationKt'
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
