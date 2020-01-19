@@ -33,13 +33,13 @@ import io.ktor.routing.post
 import io.ktor.routing.routing
 import io.ktor.server.engine.commandLineEnvironment
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.jetty.Jetty
+import io.ktor.server.netty.Netty
 import kotlinx.coroutines.runBlocking
 import kotlinx.html.*
 import kotlinx.html.stream.createHTML
 
 fun main(args: Array<String>) {
-    embeddedServer(Jetty, commandLineEnvironment(args)).start(wait = true)
+    embeddedServer(Netty, commandLineEnvironment(args)).start(wait = true)
 }
 
 suspend fun getClient(jenkinsUrl: String, jenkinsLogin: String, jenkinsPassword: String): HttpClient {
